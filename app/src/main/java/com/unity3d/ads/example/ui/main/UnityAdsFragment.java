@@ -2,6 +2,7 @@ package com.unity3d.ads.example.ui.main;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
@@ -147,6 +148,7 @@ public class UnityAdsFragment extends Fragment {
 						enableButton(loadInterstitialButton);
 						enableButton(loadRewardedButton);
 						enableButton(showBannerButton);
+						startActivity(new Intent(getActivity(), TestInterstitialActivity.class));
 					}
 
 					@Override

@@ -149,6 +149,18 @@ public class AdUnitActivity extends Activity {
 
 	@Override
 	protected void onStop() {
+
+		if(_views != null)
+			for (String viewName : _views) {
+				IAdUnitViewHandler handler = getViewHandler(viewName);
+
+				if (handler != null)
+					handler.destroy();
+			}
+
+		if (_layout != null)
+			_layout.removeAllViews();
+
 		super.onStop();
 
 		if(WebViewApp.getCurrentApp() == null) {
@@ -238,8 +250,8 @@ public class AdUnitActivity extends Activity {
 
 	@Override
 	protected void onDestroy() {
-		super.onDestroy();
-
+		if (_layout != null)
+			_layout = null;
 		if(WebViewApp.getCurrentApp() == null) {
 			if(!isFinishing()) {
 				DeviceLog.error("Unity Ads web app is null, closing Unity Ads activity from onDestroy");
@@ -263,6 +275,8 @@ public class AdUnitActivity extends Activity {
 		}
 
 		Intent.removeActiveActivity(this);
+
+		super.onDestroy();
 	}
 
 	@Override

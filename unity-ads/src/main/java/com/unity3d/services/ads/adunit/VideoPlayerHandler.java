@@ -34,6 +34,7 @@ public class VideoPlayerHandler implements IAdUnitViewHandler {
 		DeviceLog.entered();
 
 		if (_videoView != null) {
+			_videoView.stop();
 			_videoView.stopVideoProgressTimer();
 			_videoView.stopPlayback();
 			ViewUtilities.removeViewFromParent(_videoView);

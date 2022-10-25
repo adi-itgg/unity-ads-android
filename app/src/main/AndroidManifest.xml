@@ -8,6 +8,13 @@
         android:label="UnityAds 3.0"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".ui.main.TestInterstitialActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".UnityAdsTestApp"
             android:label="@string/title_activity_unity_ads_test_app"
             android:theme="@style/AppTheme.NoActionBar">

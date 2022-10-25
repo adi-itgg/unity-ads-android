@@ -1,5 +1,6 @@
 package com.unity3d.services.ads.operation.show;
 
+import android.content.Context;
 import android.graphics.Point;
 import android.os.Build;
 import android.text.TextUtils;
@@ -68,15 +69,17 @@ public class ShowModule extends AdModule<IShowOperation, ShowOperationState> imp
 			}
 		}));
 
-		ClientProperties.setActivity(state.activity);
+		if (state.activity.get() == null) return;
 
-		Display defaultDisplay = ((WindowManager)state.activity.getSystemService(state.activity.WINDOW_SERVICE)).getDefaultDisplay();
+		ClientProperties.setActivity(state.activity.get());
+
+		Display defaultDisplay = ((WindowManager)state.activity.get().getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
 		JSONObject parameters = new JSONObject();
 		JSONObject options = new JSONObject();
 		JSONObject display = new JSONObject();
 
 		try {
-			display.put("requestedOrientation", state.activity.getRequestedOrientation());
+			display.put("requestedOrientation", state.activity.get().getRequestedOrientation());
 			display.put("rotation", defaultDisplay.getRotation());
 			if (Build.VERSION.SDK_INT >= 13) {
 				Point displaySize = new Point();
